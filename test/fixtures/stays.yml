@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_in: 2018-09-03
+  date_out: 2018-09-03
+
+two:
+  date_in: 2018-09-03
+  date_out: 2018-09-03
