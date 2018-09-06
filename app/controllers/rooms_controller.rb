@@ -16,7 +16,6 @@ class RoomsController < ApplicationController
       stay.guest = guest
       stay.room = room
       stay.save!
-
     end
   end
 
