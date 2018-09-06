@@ -5,9 +5,10 @@ class Stay < ApplicationRecord
   accepts_nested_attributes_for :guest
   accepts_nested_attributes_for :room
 
-  validates :date_in, :date_out, :guest, :room,  presence: true
+  validates :date_in, :date_out, :guest, :room, :status, presence: true
   validate :date_out_greater_than_date_in
   validate :room_avaliability
+  validates :status, inclusion: { in: [ "checkin", "checkout" ] }
 
   before_save :edit_room_avaliability
   after_save :save_room

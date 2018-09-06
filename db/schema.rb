@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_04_051530) do
+ActiveRecord::Schema.define(version: 2018_09_06_135150) do
 
   create_table "consumptions", force: :cascade do |t|
     t.integer "cantidad"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2018_09_04_051530) do
     t.integer "room_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status"
     t.index ["guest_id"], name: "index_stays_on_guest_id"
     t.index ["room_id"], name: "index_stays_on_room_id"
   end

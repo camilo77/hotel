@@ -16,7 +16,7 @@ class StayTest < ActiveSupport::TestCase
     guest = Guest.create( nombre: "sebastian", apellido: "pineda",
                           documento: 12345, membership: Membership.find_by( nombre: "oro" ) )
 
-    stay = Stay.new(date_in: "12/12/2018", date_out: "13/12/2018",room: room, guest: guest )
+    stay = Stay.new(date_in: "12/12/2018", date_out: "13/12/2018",room: room, guest: guest, status: "checkin" )
     assert stay.save
   end
 
@@ -27,7 +27,7 @@ class StayTest < ActiveSupport::TestCase
     guest = Guest.create( nombre: "sebastian", apellido: "pineda",
                           documento: 12345, membership: Membership.find_by( nombre: "oro" ) )
 
-    stay = Stay.new(date_in: "13/12/2018", date_out: "12/12/2018",room: room, guest: guest )
+    stay = Stay.new(date_in: "13/12/2018", date_out: "12/12/2018",room: room, guest: guest, status: "checkin" )
     assert_not stay.save
   end
 
@@ -38,7 +38,7 @@ class StayTest < ActiveSupport::TestCase
     guest = Guest.create( nombre: "sebastian", apellido: "pineda",
                           documento: 12345, membership: Membership.find_by( nombre: "oro" ) )
 
-    stay = Stay.new(date_in: "12/12/2018", date_out: "13/12/2018",room: room, guest: guest )
+    stay = Stay.new(date_in: "12/12/2018", date_out: "13/12/2018",room: room, guest: guest, status: "checkin" )
     assert stay.save
   end
 
@@ -49,7 +49,7 @@ class StayTest < ActiveSupport::TestCase
     guest = Guest.create( nombre: "sebastian", apellido: "pineda",
                           documento: 12345, membership: Membership.find_by( nombre: "oro" ) )
 
-    stay = Stay.new(date_in: "12/12/2018", date_out: "13/12/2018",room: room, guest: guest )
+    stay = Stay.new(date_in: "12/12/2018", date_out: "13/12/2018",room: room, guest: guest, status: "checkin" )
     assert_not stay.save
   end
 
@@ -60,7 +60,7 @@ class StayTest < ActiveSupport::TestCase
     guest = Guest.create( nombre: "sebastian", apellido: "pineda",
                           documento: 12345, membership: Membership.find_by( nombre: "oro" ) )
 
-    stay = Stay.new(date_in: "12/12/2018", date_out: "13/12/2018",room: room, guest: guest )
+    stay = Stay.new(date_in: "12/12/2018", date_out: "13/12/2018",room: room, guest: guest, status: "checkin" )
     assert stay.save
   end
 
@@ -71,7 +71,7 @@ class StayTest < ActiveSupport::TestCase
     guest = Guest.create( nombre: "sebastian", apellido: "pineda",
                           documento: 12345, membership: Membership.find_by( nombre: "oro" ) )
 
-    stay = Stay.new(date_in: "12/12/2018", date_out: "13/12/2018",room: room, guest: guest )
+    stay = Stay.new(date_in: "12/12/2018", date_out: "13/12/2018",room: room, guest: guest, status: "checkin" )
     assert stay.save
     room = Room.find_by(number:101)
     assert_equal(false, room.avaliable)

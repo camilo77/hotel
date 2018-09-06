@@ -15,6 +15,7 @@ class RoomsController < ApplicationController
       stay = Stay.new( checkin_params[:stay] )
       stay.guest = guest
       stay.room = room
+      stay.status = "checkin"
       if stay.save
         render json: { message: "checkin created"}, status: :ok
       else
@@ -23,6 +24,19 @@ class RoomsController < ApplicationController
     else
       render json: { errors: "No room or guest"}, status: :bad_request
     end
+  end
+
+  def roomCheckout
+    ####
+    puts checkout_params
+    guest = Guest.find_by( checkout_params[:guest] )
+    room = Room.find_by( checkout_params[:room] )
+    ####
+    puts guest.nombre
+    if guest.present? && room.present?
+      stay = Stay.find_by( guest: guest )
+    end
+    render json: { message: "checkout created"}, status: :ok
   end
 
   private
@@ -36,4 +50,15 @@ class RoomsController < ApplicationController
                                        guest: [ :documento, :nombre ]
                                      )
     end
+
+    def checkout_params
+      params.require(:checkout).require(:guest).require( :documento )
+      params.require(:checkout).require(:room).require( :number )
+      params.require(:checkout).permit(
+                                       guest: [ :documento ],
+                                       room: [ :number ],
+                                       products: [ product: [:name, :cantidad] ]
+                                     )
+    end
+
 end
