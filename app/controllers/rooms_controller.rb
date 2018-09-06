@@ -15,7 +15,13 @@ class RoomsController < ApplicationController
       stay = Stay.new( checkin_params[:stay] )
       stay.guest = guest
       stay.room = room
-      stay.save!
+      if stay.save
+        render json: { message: "checkin created"}, status: :ok
+      else
+        render json: { errors: stay.errors.full_messages }, status: :bad_request
+      end
+    else
+      render json: { errors: "No room or guest"}, status: :bad_request
     end
   end
 
