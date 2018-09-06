@@ -49,4 +49,9 @@ class Stay < ApplicationRecord
     end
     price = prices.reduce(:+)
   end
+
+  def priceWithDiscount
+    (self.stayPrice - (self.stayPrice * self.guest.membership.discount))
+  end
+
 end

@@ -17,9 +17,6 @@ class RoomsController < ApplicationController
       stay.room = room
       stay.status = "checkin"
       if stay.save
-        ####
-        puts "hohohohohohohohohohohohohohohohohohohoho"
-        puts stay.stayPrice
         render json: { message: "checkin created"}, status: :ok
       else
         render json: { errors: stay.errors.full_messages }, status: :bad_request
@@ -30,21 +27,26 @@ class RoomsController < ApplicationController
   end
 
   def roomCheckout
-    ####
-    puts checkout_params
     guest = Guest.find_by( checkout_params[:guest] )
     room = Room.find_by( checkout_params[:room] )
-    ####
+
     puts guest.nombre
     if guest.present? && room.present?
       stay = Stay.find_by( guest: guest, room: room, status: "checkin" )
       if stay.present?
         stay.checkout
+        render json: { room: stay.room.as_json,
+                       date_in: stay.date_in,
+                       date_out: stay.date_out,
+                       price: stay.stayPrice,
+                       discountRate: stay.guest.membership.discount,
+                       priceWithDiscount: stay.priceWithDiscount }, status: :ok
+      else
+        render json: { message: "the Stay does't exists or was checkout already"}, status: :bad_request
       end
-      ####
-      puts stay.date_in
+    else
+      render json: { message: "No room or guest correct"}, status: :bad_request
     end
-    render json: { message: "checkout created"}, status: :ok
   end
 
   private
@@ -64,8 +66,7 @@ class RoomsController < ApplicationController
       params.require(:checkout).require(:room).require( :number )
       params.require(:checkout).permit(
                                        guest: [ :documento ],
-                                       room: [ :number ],
-                                       products: [ product: [:name, :cantidad] ]
+                                       room: [ :number ]
                                      )
     end
 
