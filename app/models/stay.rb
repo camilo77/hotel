@@ -42,4 +42,11 @@ class Stay < ApplicationRecord
     self.room.avaliable = true
     self.save
   end
+
+  def stayPrice
+    prices = (self.date_in...self.date_out).map do |date, sum|
+      self.room.rates.find_by(week_day: date.wday).price
+    end
+    price = prices.reduce(:+)
+  end
 end

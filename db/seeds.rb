@@ -16,21 +16,21 @@ rates = Rate.create( [ { room: Room.find_by( number: 101 ), price: 10000, week_d
                        { room: Room.find_by( number: 101 ), price: 10000, week_day: 4 },
                        { room: Room.find_by( number: 101 ), price: 10000, week_day: 5 },
                        { room: Room.find_by( number: 101 ), price: 15000, week_day: 6 },
-                       { room: Room.find_by( number: 101 ), price: 15000, week_day: 7 },
+                       { room: Room.find_by( number: 101 ), price: 15000, week_day: 0 },
                        { room: Room.find_by( number: 102 ), price: 5000, week_day: 1 },
                        { room: Room.find_by( number: 102 ), price: 5000, week_day: 2 },
                        { room: Room.find_by( number: 102 ), price: 5000, week_day: 3 },
                        { room: Room.find_by( number: 102 ), price: 5000, week_day: 4 },
-                       { room: Room.find_by( number: 102 ), price: 7000, week_day: 5 },
+                       { room: Room.find_by( number: 102 ), price: 0000, week_day: 5 },
                        { room: Room.find_by( number: 102 ), price: 10000, week_day: 6 },
-                       { room: Room.find_by( number: 102 ), price: 10000, week_day: 7 },
+                       { room: Room.find_by( number: 102 ), price: 10000, week_day: 0 },
                        { room: Room.find_by( number: 103 ), price: 15000, week_day: 1 },
                        { room: Room.find_by( number: 103 ), price: 15000, week_day: 2 },
                        { room: Room.find_by( number: 103 ), price: 15000, week_day: 3 },
                        { room: Room.find_by( number: 103 ), price: 15000, week_day: 4 },
                        { room: Room.find_by( number: 103 ), price: 20000, week_day: 5 },
                        { room: Room.find_by( number: 103 ), price: 25000, week_day: 6 },
-                       { room: Room.find_by( number: 103 ), price: 20000, week_day: 7 }
+                       { room: Room.find_by( number: 103 ), price: 20000, week_day: 0 }
                    ] )
 
 memberships = Membership.create( [  { nombre: "oro", discount: 0.1 },

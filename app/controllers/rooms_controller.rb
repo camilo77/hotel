@@ -17,6 +17,9 @@ class RoomsController < ApplicationController
       stay.room = room
       stay.status = "checkin"
       if stay.save
+        ####
+        puts "hohohohohohohohohohohohohohohohohohohoho"
+        puts stay.stayPrice
         render json: { message: "checkin created"}, status: :ok
       else
         render json: { errors: stay.errors.full_messages }, status: :bad_request

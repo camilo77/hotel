@@ -93,4 +93,25 @@ class StayTest < ActiveSupport::TestCase
     assert_equal(true, stay.room.avaliable)
   end
 
+  test "the stay price should be correct" do
+    room= Room.create( number: 101, floor: 1, bed_number: 2,
+                       guests_number: 3, avaliable: true )
+    rates = Rate.create( [ { room: room, price: 10000, week_day: 1 },
+                          { room: room, price: 10000, week_day: 2 },
+                          { room: room, price: 10000, week_day: 3 },
+                          { room: room, price: 10000, week_day: 4 },
+                          { room: room, price: 10000, week_day: 5 },
+                          { room: room, price: 15000, week_day: 6 },
+                          { room: room, price: 15000, week_day: 0 } ] )
+
+    membership = Membership.create( nombre: "oro", discount: 0.1 )
+    guest = Guest.create( nombre: "sebastian", apellido: "pineda",
+                          documento: 12345, membership: Membership.find_by( nombre: "oro" ) )
+
+    stay = Stay.create(date_in: "3/12/2018", date_out: "11/12/2018",room: room, guest: guest, status: "checkin" )
+
+
+    assert_equal(90000, stay.stayPrice)
+  end
+
 end
