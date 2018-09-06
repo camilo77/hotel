@@ -34,7 +34,12 @@ class RoomsController < ApplicationController
     ####
     puts guest.nombre
     if guest.present? && room.present?
-      stay = Stay.find_by( guest: guest )
+      stay = Stay.find_by( guest: guest, room: room, status: "checkin" )
+      if stay.present?
+        stay.checkout
+      end
+      ####
+      puts stay.date_in
     end
     render json: { message: "checkout created"}, status: :ok
   end

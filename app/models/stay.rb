@@ -7,11 +7,11 @@ class Stay < ApplicationRecord
 
   validates :date_in, :date_out, :guest, :room, :status, presence: true
   validate :date_out_greater_than_date_in
-  validate :room_avaliability
+  validate :room_avaliability, on: :create
   validates :status, inclusion: { in: [ "checkin", "checkout" ] }
 
-  before_save :edit_room_avaliability
-  after_save :save_room
+  before_create :edit_room_avaliability
+  after_create :save_room
 
   def save_room
     room.save
@@ -35,5 +35,11 @@ class Stay < ApplicationRecord
     if room.present? && room.avaliable == false
       errors.add(:room, "room no avaliable")
     end
+  end
+
+  def checkout
+    self.status = "checkout"
+    self.room.avaliable = true
+    self.save
   end
 end

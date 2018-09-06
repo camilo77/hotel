@@ -76,4 +76,21 @@ class StayTest < ActiveSupport::TestCase
     room = Room.find_by(number:101)
     assert_equal(false, room.avaliable)
   end
+
+  test "should update stay status and room availability after checkout" do
+    room= Room.create( number: 101, floor: 1, bed_number: 2,
+                       guests_number: 3, avaliable: true )
+    membership = Membership.create( nombre: "oro", discount: 0.1 )
+    guest = Guest.create( nombre: "sebastian", apellido: "pineda",
+                          documento: 12345, membership: Membership.find_by( nombre: "oro" ) )
+
+    stay = Stay.create(date_in: "12/12/2018", date_out: "13/12/2018",room: room, guest: guest, status: "checkin" )
+
+    assert_equal(false, stay.room.avaliable)
+    # stay checkout method
+    stay.checkout
+    assert_equal("checkout", stay.status)
+    assert_equal(true, stay.room.avaliable)
+  end
+
 end
